@@ -11,7 +11,7 @@
      */
     class BaseJsonRpcServer {
 
-    	const ParseError	 = -32700;
+        const ParseError     = -32700;
 
         const InvalidRequest = -32600;
 
@@ -351,7 +351,9 @@
                     header( 'Access-Control-Allow-Headers: x-requested-with, content-type' );
                 }
 
-                echo json_encode( $this->response );
+                header('Content-Type: text/html; charset=utf-8');
+
+                echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
                 $this->resetVars();
             }
         }
