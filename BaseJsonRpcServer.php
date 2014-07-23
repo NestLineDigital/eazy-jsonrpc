@@ -69,7 +69,7 @@
          * Content Type
          * @var string
          */
-        public $ContentType = 'application/json';
+        public $ContentType = 'application/json; charset=utf-8';
 
         /**
          * Alow Cross-Domain Requests
@@ -351,9 +351,12 @@
                     header( 'Access-Control-Allow-Headers: x-requested-with, content-type' );
                 }
 
-                header('Content-Type: text/html; charset=utf-8');
+                //если требуется -- выводим smd в человекочитаемом виде
+                if ( array_key_exists( 'smd', $_GET ) && array_key_exists( 'lovepeople', $_GET ))
+                    print_r($this->response);
+                else
+                    echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
 
-                echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
                 $this->resetVars();
             }
         }
